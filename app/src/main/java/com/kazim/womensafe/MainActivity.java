@@ -1,7 +1,5 @@
 package com.kazim.womensafe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
     ImageView logo;
     private static int SPLASH_SCREEN_TIME_OUT=2500;
@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        Intent myIntent = new Intent(MainActivity.this, LoginScreen.class);
+//        MainActivity.this.startActivity(myIntent);
+//        finish();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         logo = (ImageView)findViewById(R.id.logo);
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent UserLogin=new Intent(MainActivity.this,MainActivity2.class);
+                Intent UserLogin=new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(UserLogin);
                 finish();
             }
