@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "61640754688",
+    "firebase_url": "https://womensafe-app.firebaseio.com",
+    "project_id": "womensafe-app",
+    "storage_bucket": "womensafe-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61640754688:android:8fdea0e533b2f6af55bae5",
+        "android_client_info": {
+          "package_name": "com.kazim.womensafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61640754688-co7p8m6l34o1o8ori31hu5fr7ltqt56u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7VDcryV6CBR6cyoH-jjv6YP9UMueX_ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61640754688-co7p8m6l34o1o8ori31hu5fr7ltqt56u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
