@@ -1,32 +1,39 @@
 package com.kazim.womensafe;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.os.Handler;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    ImageView logo;
+    private static int SPLASH_SCREEN_TIME_OUT=2500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        Intent myIntent = new Intent(MainActivity.this, LoginScreen.class);
+//        MainActivity.this.startActivity(myIntent);
+//        finish();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Intent myIntent = new Intent(MainActivity.this, LoginScreen.class);
-        MainActivity.this.startActivity(myIntent);
-        finish();
+        logo = (ImageView)findViewById(R.id.logo);
+        Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        logo.startAnimation(aniFade);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent UserLogin=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(UserLogin);
+                finish();
+            }
+        }, SPLASH_SCREEN_TIME_OUT);
+
     }
 }

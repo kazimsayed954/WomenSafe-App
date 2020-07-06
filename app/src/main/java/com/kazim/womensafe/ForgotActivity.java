@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotScreen extends AppCompatActivity {
+public class ForgotActivity extends AppCompatActivity {
     private EditText memail;
     private FirebaseAuth auth;
 
@@ -51,9 +51,9 @@ public class ForgotScreen extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(ForgotScreen.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgotActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(ForgotScreen.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgotActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
                                 }
 
                             }

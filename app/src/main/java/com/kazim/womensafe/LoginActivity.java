@@ -16,14 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText mname,mpassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
@@ -76,7 +75,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
                 auth.signInWithEmailAndPassword(name, password)
-                        .addOnCompleteListener(LoginScreen.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 // If sign in fails, display a message to the user. If sign in succeeds
@@ -89,7 +88,7 @@ public class LoginScreen extends AppCompatActivity {
                                     String yourString = Objects.requireNonNull(task.getException()).toString();
                                     String target = "Exception:";
                                     String error = yourString.substring(yourString.indexOf(target) + target.length() + 1, yourString.length());
-                                        Toast.makeText(LoginScreen.this, "Error: "+error, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this, "Error: "+error, Toast.LENGTH_LONG).show();
                                 }
                                 else {
                                     checkIfEmailVerified();
@@ -102,15 +101,15 @@ public class LoginScreen extends AppCompatActivity {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(LoginScreen.this, ForgotScreen.class);
-                LoginScreen.this.startActivity(myIntent);
+                Intent myIntent = new Intent(LoginActivity.this, ForgotActivity.class);
+                LoginActivity.this.startActivity(myIntent);
             }
         });
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(LoginScreen.this, RegisterScreen.class);
-                LoginScreen.this.startActivity(myIntent);
+                Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(myIntent);
                 finish();
             }
         });
@@ -122,7 +121,9 @@ public class LoginScreen extends AppCompatActivity {
         if (user.isEmailVerified())
         {
             // user is verified, so you can finish this activity or send user to activity which you want.
-            Toast.makeText(LoginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            Intent myIntent = new Intent(LoginActivity.this, MainActivity2.class);
+            LoginActivity.this.startActivity(myIntent);
+            finish();
 
 
         }

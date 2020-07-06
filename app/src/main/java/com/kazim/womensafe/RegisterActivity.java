@@ -1,8 +1,5 @@
 package com.kazim.womensafe;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,16 +9,18 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class RegisterScreen extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private EditText mname,mpassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
@@ -71,7 +70,7 @@ public class RegisterScreen extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 auth.createUserWithEmailAndPassword(name, password)
-                        .addOnCompleteListener(RegisterScreen.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
@@ -84,7 +83,7 @@ public class RegisterScreen extends AppCompatActivity {
                                     String target = "Exception:";
                                     String error = yourString.substring(yourString.indexOf(target) + target.length() + 1, yourString.length());
 
-                                    Toast.makeText(RegisterScreen.this, "Error: " + error,
+                                    Toast.makeText(RegisterActivity.this, "Error: " + error,
                                             Toast.LENGTH_SHORT).show();
                                 } else {
 //                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
@@ -109,8 +108,8 @@ public class RegisterScreen extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(RegisterScreen.this, LoginScreen.class);
-                RegisterScreen.this.startActivity(myIntent);
+                Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                RegisterActivity.this.startActivity(myIntent);
                 finish();
             }
         });
@@ -128,9 +127,11 @@ public class RegisterScreen extends AppCompatActivity {
                             // email sent
                             // after email is sent just logout the user and finish this activity
                             FirebaseAuth.getInstance().signOut();
-                            Toast.makeText(RegisterScreen.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-//                            finish();
+                            Toast.makeText(RegisterActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
+                            Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            RegisterActivity.this.startActivity(myIntent);
+                            finish();
+
                         }
                         else
                         {
