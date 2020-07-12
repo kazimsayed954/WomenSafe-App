@@ -438,4 +438,9 @@ public class MainActivity2 extends AppCompatActivity implements GestureDetector.
         Toast.makeText(getApplicationContext(),"SOS Clicked",Toast.LENGTH_SHORT).show();
 
     }
+
+    public void Guide_Self(View view) {
+        Intent i = new Intent(getApplicationContext(),SelfdefenceActivity.class);
+        startActivity(i);
+    }
 }
