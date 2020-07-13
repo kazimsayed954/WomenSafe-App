@@ -30,12 +30,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
+
+        if (auth.getCurrentUser() != null) {
+            Intent myIntent = new Intent(LoginActivity.this, MainActivity2.class);
+            LoginActivity.this.startActivity(myIntent);
+            finish();
+        }
         setContentView(R.layout.login_screen);
 
         mname = findViewById(R.id.name);
         mpassword = findViewById(R.id.password);
         TextView forgot = findViewById(R.id.forgot);
-        auth = FirebaseAuth.getInstance();
         Button loginbtn = findViewById(R.id.loginbtn);
         Button registerbtn = findViewById(R.id.registerbtn);
         progressBar = findViewById(R.id.progressBar);
