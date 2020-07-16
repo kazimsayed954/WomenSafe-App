@@ -9,11 +9,15 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -27,6 +31,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -38,18 +53,30 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity2 extends AppCompatActivity implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener
 {
     Button btnShowLocation;private static final int REQUEST_CODE_PERMISSION = 2;
     TextInputLayout textInputLayout;
-    int position = 0;String mPermission = Manifest.permission.ACCESS_FINE_LOCATION,msg;
+    int position = 0;
+    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION,msg;
     GPSTracker gps;// GPSTracker class
     String[] phoneNo,ph = {"ph1","ph2","ph3","ph4","ph5"};
     SharedPreferences sp;int flag = 0;int p;
-    EditText et;GestureDetector gestureDetector;
+    EditText et;
+    GestureDetector gestureDetector;
+
+
     @SuppressLint("ResourceType") @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -172,8 +199,12 @@ public class MainActivity2 extends AppCompatActivity implements GestureDetector.
                 gps = new GPSTracker(MainActivity2.this);// create class object
                 if(gps.canGetLocation())// check if GPS enabled
                 {
+                    String uniqueID = UUID.randomUUID().toString();
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
+                    //----------------------------------------------
+
+                    //----------------------------------------------
                     msg = et.getText()+"\nHelp me...I'm at\n"+"https://www.google.com/maps?q="+latitude+","+longitude;
                     Toast.makeText(getApplicationContext(), msg+"", Toast.LENGTH_LONG).show();
                     send();
@@ -188,6 +219,7 @@ public class MainActivity2 extends AppCompatActivity implements GestureDetector.
             }
         });
     }
+
     public void send()
     {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
@@ -436,7 +468,59 @@ public class MainActivity2 extends AppCompatActivity implements GestureDetector.
         textInputLayout.setVisibility(View.VISIBLE);
         btnShowLocation.setVisibility(View.VISIBLE);
         Toast.makeText(getApplicationContext(),"SOS Clicked",Toast.LENGTH_SHORT).show();
-
+        //-------------------------------------------------------
+        GPSTracker gps = new GPSTracker(MainActivity2.this);
+        String uniqueID = UUID.randomUUID().toString();
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
+        Geocoder geocoder = new Geocoder(MainActivity2.this,Locale.getDefault());
+        try {
+            List<Address> addressList = geocoder.getFromLocation(latitude,longitude,1);
+            if(addressList!=null){
+                String address = addressList.get(0).getAddressLine(0);
+                String state = addressList.get(0).getAdminArea();
+                sendDataToServer(uniqueID,latitude,longitude,address,state);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.w("About Current Location","Curent address cannnot be detected");
+            Toast.makeText(getApplicationContext(),"Failed to get Location",Toast.LENGTH_LONG).show();
+        }
+        //----------------------------------------------------------------------
+    }
+    public void sendDataToServer(String uniqueID,double latitude,double longitude,String address,String state) {
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            String URL = "https://police-dashboard.herokuapp.com/api/locations/";
+            JSONObject postparams = new JSONObject();
+            try {
+                postparams.put("android_id", uniqueID);
+                postparams.put("latitude", Double.toString(latitude));
+                postparams.put("longitude", Double.toString(longitude));
+                postparams.put("address", address);
+                postparams.put("state", state.toLowerCase());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, URL, postparams,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+            requestQueue.add(jsonObjReq);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void Guide_Self(View view) {
