@@ -507,13 +507,13 @@ public class MainActivity2 extends AppCompatActivity implements GestureDetector.
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                         }
                     });
             requestQueue.add(jsonObjReq);
