@@ -1,0 +1,211 @@
+[33mcommit 5501c7d1e77a74669431fe046c0a1927d462ea11[m[33m ([m[1;36mHEAD -> [m[1;32mnav-drawer[m[33m)[m
+Author: TheRealTechWiz <w3.goyal@gmail.com>
+Date:   Fri Jul 24 20:05:00 2020 +0530
+
+    add actual dynamic name and email to navigation drawer also username field in signup
+
+[33mcommit 8c54c948830b2e97322a4af1ef07572bfa0c8f4e[m
+Author: TheRealTechWiz <w3.goyal@gmail.com>
+Date:   Fri Jul 24 16:08:55 2020 +0530
+
+    add navigation drawer with hardcoded email and name
+
+[33mcommit 29b1e379dfcc7c7e423800370017c1f9e686a61a[m[33m ([m[1;31morigin/login-register[m[33m, [m[1;32mlogin-register[m[33m)[m
+Merge: 5a67e25 7f4148a
+Author: TheRealTechWiz <w3.goyal@gmail.com>
+Date:   Tue Jul 14 00:57:37 2020 +0530
+
+    Merge remote-tracking branch 'upstream/master' into login-register
+
+[33mcommit 5a67e25840d7bd091d3f9bd428608f04c5a15efd[m
+Author: TheRealTechWiz <w3.goyal@gmail.com>
+Date:   Tue Jul 14 00:54:03 2020 +0530
+
+    add user persistance
+
+[33mcommit 7f4148ae0575bb486e9f1623d14830cbdfc6efb8[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 12 21:25:02 2020 +0530
+
+    Update README.md
+
+[33mcommit 361cd211be026a8359970441f1ba14a6648b94e7[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 12 21:24:40 2020 +0530
+
+    Update README.md
+
+[33mcommit 8cb3dcb696a5655ea77fb9c992c7368ab106efd1[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 12 21:24:15 2020 +0530
+
+    Update README.md
+
+[33mcommit 6e5c684ef542ed5e3e6b578180831019ac732fda[m
+Merge: c8ea312 2800463
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 12 20:38:16 2020 +0530
+
+    Merge pull request #17 from maharishi1/Fix-#15
+    
+    Fix #15
+
+[33mcommit 2800463b18fa50e955b3842c70b9d1e13340d835[m
+Author: Rishi <rishiraj619march@gmail.com>
+Date:   Sun Jul 12 20:22:49 2020 +0530
+
+    Adding Self guide feature and widget
+
+[33mcommit 51f948db564f1fa276de82d97f66c2786c89f2b0[m
+Author: Rishi <rishiraj619march@gmail.com>
+Date:   Sun Jul 12 19:50:21 2020 +0530
+
+    k
+
+[33mcommit c8ea312aae72a54e831bc0fe90d9d74b4374225b[m
+Merge: 497dd6e 1e38607
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Mon Jul 6 13:45:25 2020 +0530
+
+    Merge pull request #16 from TheRealTechWiz/login-register
+    
+    Login register
+
+[33mcommit 1e38607f8c36642ae2ef754febd2b25d6ecb65d9[m
+Merge: d82df5a 497dd6e
+Author: TheRealTechWiz <w3.goyal@gmail.com>
+Date:   Mon Jul 6 12:57:51 2020 +0530
+
+    add login and register with ui
+
+[33mcommit d82df5a8386d211c82cfb06967c57ebee001a64b[m
+Author: TheRealTechWiz <w3.goyal@gmail.com>
+Date:   Mon Jul 6 12:16:57 2020 +0530
+
+    add login and register functionality with UI
+
+[33mcommit 497dd6efd9ce7a475853ea0a7e91627b02bbe7e3[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 5 18:08:02 2020 +0530
+
+    Update README.md
+
+[33mcommit a279dcd259a9c6fb7de82456106c6215b00abe9c[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 5 18:07:52 2020 +0530
+
+    Update README.md
+
+[33mcommit 5711880c98af70408d3312d9a8b35967e55353eb[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 5 18:07:37 2020 +0530
+
+    Update README.md
+
+[33mcommit bfdc0effdc5cad252ac2bb333445319a22fbd89e[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jul 5 18:07:20 2020 +0530
+
+    Update README.md
+
+[33mcommit 96da5451d2735536fc67bf379ff0fbf7f17a43a2[m
+Merge: edc1185 38235e3
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Thu Jul 2 19:34:45 2020 +0530
+
+    Merge pull request #14 from maharishi1/Fix-#13
+    
+    Adding SOS Functionality
+
+[33mcommit 38235e361728105494a4985f1b894b5aa246fe58[m
+Author: Rishi <rishiraj619march@gmail.com>
+Date:   Thu Jul 2 19:20:06 2020 +0530
+
+    Adding sos
+
+[33mcommit edc1185dc29a4247a312b17256eae193fc967cae[m
+Merge: ed12627 69a1d10
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Wed Jul 1 10:00:26 2020 +0530
+
+    Merge pull request #12 from abhishekgupta368/splash_screen
+    
+    Splash Screen
+
+[33mcommit 69a1d10d7f66046377def75d0ea9477faa85a1bc[m
+Author: abhishekgupta368 <abhigupta9087@gmail.com>
+Date:   Wed Jul 1 00:16:56 2020 +0530
+
+    Splash Screen
+
+[33mcommit ed126277937964353da0c01f96f4fc34deb9a7af[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: d61863f 0fc1b1e
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Sun Jun 28 18:51:27 2020 +0530
+
+    Merge pull request #7 from maharishi1/adding-wireframe
+    
+    Adding Wireframe of app
+
+[33mcommit d61863ffb574f438b21abcb83ba247edd56f40fa[m
+Author: kazimsayed954 <kazimsayed954@gmail.com>
+Date:   Sat Jun 27 22:30:52 2020 +0530
+
+    <message>
+
+[33mcommit 0fc1b1e93630c1d5e4ea5625ed8944c2a7540d7c[m
+Author: Rishi <rishiraj619march@gmail.com>
+Date:   Sat Jun 27 00:57:24 2020 +0530
+
+    Adding Wireframe of app
+
+[33mcommit cfa94840f1a5d0be9ea80baae4b3a5d3c7c6a2ac[m
+Merge: 4623f6e 613b142
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Fri Jun 26 23:05:39 2020 +0530
+
+    Merge pull request #6 from kazimsayed954/revert-3-add_wireframe
+    
+    Revert "Added Wireframe"
+
+[33mcommit 613b1421a5b886d4dc975616cab5e6f36fbbdcc7[m[33m ([m[1;31mupstream/revert-3-add_wireframe[m[33m, [m[1;31morigin/revert-3-add_wireframe[m[33m)[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Fri Jun 26 23:05:11 2020 +0530
+
+    Revert "Added Wireframe"
+
+[33mcommit 4623f6e228a638c00e77cf5e966796f735dfa28e[m
+Merge: f638f3f 6291dee
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Fri Jun 26 23:02:35 2020 +0530
+
+    Merge pull request #5 from kazimsayed954/test
+    
+    Revert "Added Wireframe"
+
+[33mcommit 6291dee802f530ecedaf55c3f861070e6c771bb1[m[33m ([m[1;31mupstream/test[m[33m, [m[1;31morigin/test[m[33m)[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Fri Jun 26 22:54:39 2020 +0530
+
+    Revert "Added Wireframe"
+
+[33mcommit f638f3fccdff9ed791de7a0433b1fe6f8f0508aa[m
+Merge: 89494b5 2db9a36
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Fri Jun 26 22:54:28 2020 +0530
+
+    Merge pull request #3 from abhishekgupta368/add_wireframe
+    
+    Added Wireframe
+
+[33mcommit 2db9a3681b281fc4faba2f6da626ca27d171f6d4[m
+Author: abhishekgupta368 <abhigupta9087@gmail.com>
+Date:   Fri Jun 26 22:47:03 2020 +0530
+
+    Added Wireframe
+
+[33mcommit 89494b5747e08443a9351fb9084a5b11a8babeb1[m
+Author: Sayed Mohd Kazim Mehdi <41298650+kazimsayed954@users.noreply.github.com>
+Date:   Wed Jun 24 20:56:41 2020 +0530
+
+    Initial commit

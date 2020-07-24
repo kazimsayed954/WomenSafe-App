@@ -1,5 +1,6 @@
 package com.kazim.womensafe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -53,6 +54,9 @@ public class ForgotActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(ForgotActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
                                     auth.signOut();
+                                    Intent myIntent = new Intent(ForgotActivity.this, LoginActivity.class);
+                                    ForgotActivity.this.startActivity(myIntent);
+                                    finish();
                                 } else {
                                     Toast.makeText(ForgotActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
                                 }
