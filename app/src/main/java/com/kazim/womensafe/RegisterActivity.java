@@ -17,22 +17,26 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText mname,mpassword;
+    private EditText mname,mpassword,musername;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_screen);
 
+        musername = findViewById(R.id.username);
         mname = findViewById(R.id.name);
         mpassword = findViewById(R.id.password);
         Button registerbtn = findViewById(R.id.registerbtn);
         auth = FirebaseAuth.getInstance();
+
         Button loginbtn = findViewById(R.id.loginbtn);
         progressBar = findViewById(R.id.progressBar);
 
@@ -88,14 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
 //                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
 //                                    finish();
-//
 //                                    Toast.makeText(RegisterScreen.this, "Created User", Toast.LENGTH_SHORT).show();
-
-                                    FirebaseUser user = auth.getCurrentUser();
+                                    user = auth.getCurrentUser();
                                     if (user != null) {
                                         // User is signed in
                                         // NOTE: this Activity should get onpen only when the user is not signed in, otherwise
                                         // the user will receive another verification email.
+                                        addUserName();
                                         sendVerificationEmail();
                                     }
 
@@ -116,8 +119,27 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    private void addUserName() {
+        final String username = musername.getText().toString();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(username)
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                        }
+                        else{
+                            Toast.makeText(RegisterActivity.this, "Could not add Username", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     private void sendVerificationEmail() {
-        FirebaseUser user = auth.getCurrentUser();
+        final FirebaseUser user = auth.getCurrentUser();
 
         user.sendEmailVerification()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

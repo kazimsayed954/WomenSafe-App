@@ -14,12 +14,14 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;
+import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,7 @@ import java.util.Locale;
 public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener
 {
     private DrawerLayout drawer;
+    NavigationView navigationView;
     private FirebaseAuth auth;
     private FirebaseUser user;
     Button btnShowLocation;private static final int REQUEST_CODE_PERMISSION = 2;
@@ -93,7 +96,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
 
         drawer = findViewById(R.id.drawer_layout);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -101,6 +104,7 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setCheckedItem(R.id.sosactivity);
+        addDetails();
 
         gestureDetector = new GestureDetector(MainActivity2.this, MainActivity2.this);
         LocationRequest locationRequest = LocationRequest.create();
@@ -216,6 +220,23 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                 }
             }
         });
+    }
+
+    private void addDetails() {
+        String headname = user.getDisplayName();
+        String headmail = user.getEmail();
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvheadname = headerView.findViewById(R.id.header_name);
+        TextView tvheadmail = headerView.findViewById(R.id.header_email);
+//        Toast.makeText(this, headname, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, headmail, Toast.LENGTH_SHORT).show();
+//
+        if (!(TextUtils.isEmpty(headname))){
+            tvheadname.setText(headname);
+        }
+        if (!(TextUtils.isEmpty(headmail))){
+            tvheadmail.setText(headmail);
+        }
     }
 
     @Override
