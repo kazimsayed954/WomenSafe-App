@@ -55,6 +55,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.kazim.womensafe.FakeCall.FakeCallActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -274,6 +275,11 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                 auth.signOut();
                 Intent myIntent1 = new Intent(MainActivity2.this, ForgotActivity.class);
                 MainActivity2.this.startActivity(myIntent1);
+                finish();
+                break;
+            case R.id.fakecallactivity:
+                Intent myIntent2 = new Intent(MainActivity2.this, FakeCallActivity.class);
+                MainActivity2.this.startActivity(myIntent2);
                 finish();
                 break;
         }

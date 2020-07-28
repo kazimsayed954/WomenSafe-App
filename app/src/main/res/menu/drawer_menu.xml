@@ -5,6 +5,11 @@
             android:id="@+id/sosactivity"
             android:title="SOS"
             android:icon="@drawable/ic_sos"/>
+
+        <item
+            android:id="@+id/fakecallactivity"
+            android:title="Fake Call"
+            android:icon="@drawable/ic_round_call_24"/>
     </group>
     <item android:title="Actions">
         <menu>

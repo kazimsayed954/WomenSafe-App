@@ -5,4 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="topbar">#006400</color>
     <color name="floatb">#758AA7</color>
+    <color name="yellow">#FDD835</color>
+    <color name="blue">#84FFFF</color>
+    <color name="pink">#8F1B44</color>
+    <color name="black">#000000</color>
 </resources>
