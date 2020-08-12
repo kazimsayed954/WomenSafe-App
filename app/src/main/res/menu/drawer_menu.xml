@@ -5,6 +5,10 @@
             android:id="@+id/sosactivity"
             android:title="SOS"
             android:icon="@drawable/ic_sos"/>
+        <item
+            android:id="@+id/chatactivity"
+            android:title="Chat Room"
+            android:icon="@drawable/ic_chat"/>
     </group>
     <item android:title="Actions">
         <menu>

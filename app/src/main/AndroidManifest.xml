@@ -41,6 +41,7 @@
         <activity android:name=".ForgotActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".Contacts"/>
+        <activity android:name=".ChatActivity"/>
         <activity android:name=".MainActivity2" >
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
