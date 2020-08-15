@@ -8,12 +8,14 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -45,15 +47,22 @@ public class ChatActivity extends DrawerDefault {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabaseReference;
     private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mFirebaseAdapter;
+    private String rightmsg;
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
         ImageView messageImageView;
         TextView messengerTextView;
         ImageView messengerImageView;
+        LinearLayout msgllayout;
+        LinearLayout bubblellayout;
+        public static final int  MSG__TYPE_LEFT = 0;
+        public static final int  MSG__TYPE_RIGHT = 1;
 
         public MessageViewHolder(View v) {
             super(v);
+            msgllayout = itemView.findViewById(R.id.textLinearLayout);
+            bubblellayout = itemView.findViewById(R.id.bubbleLinearLayout);
             messageTextView = (TextView) itemView.findViewById(R.id.messageTextView);
             messageImageView = (ImageView) itemView.findViewById(R.id.messageImageView);
             messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
@@ -132,17 +141,27 @@ public class ChatActivity extends DrawerDefault {
                         .setQuery(messagesRef, parser)
                         .build();
         mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder>(options) {
+//            @Override
+//            public int getItemViewType(int position) {
+//                Log.i("msgg----", String.valueOf(position));
+//                return super.getItemViewType(position);
+//            }
+
             @Override
             public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new MessageViewHolder(inflater.inflate(R.layout.item_message, viewGroup, false));
+                return new MessageViewHolder(inflater.inflate(R.layout.item_message_left, viewGroup, false));
             }
 
             @Override
             protected void onBindViewHolder(final MessageViewHolder viewHolder,
                                             int position,
                                             FriendlyMessage friendlyMessage) {
+
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
+                Log.i("msg--","UID: "+friendlyMessage.getUID());
+                isMessageSent(friendlyMessage.getUID(),viewHolder);
                 if (friendlyMessage.getText() != null) {
                     viewHolder.messageTextView.setText(friendlyMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
@@ -238,7 +257,7 @@ public class ChatActivity extends DrawerDefault {
                         FriendlyMessage(mMessageEditText.getText().toString(),
                         mUsername,
                         mPhotoUrl,
-                        null /* no image */);
+                        null /* no image */,mFirebaseUser.getUid());
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
                         .push().setValue(friendlyMessage);
                 mMessageEditText.setText("");
@@ -257,6 +276,25 @@ public class ChatActivity extends DrawerDefault {
         });
     }
 
+    private void isMessageSent(String fmsgUID,MessageViewHolder viewHolder) {
+        final float scale = ChatActivity.this.getResources().getDisplayMetrics().density;
+        int pixels = (int) (300 * scale + 0.5f);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pixels, ViewGroup.LayoutParams.MATCH_PARENT);
+        Log.i("msg---",mFirebaseUser.getUid()+"msguid "+fmsgUID);
+        if(fmsgUID.equals(mFirebaseUser.getUid())){
+            params.gravity = Gravity.END;
+            viewHolder.bubblellayout.setLayoutParams(params);
+            viewHolder.msgllayout.setBackgroundResource(R.drawable.background_message_right);
+            viewHolder.messengerImageView.setVisibility(View.GONE);
+        }
+        else{
+             params.gravity = Gravity.START;
+            viewHolder.bubblellayout.setLayoutParams(params);
+            viewHolder.msgllayout.setBackgroundResource(R.drawable.background_message_left);
+            viewHolder.messengerImageView.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
         storageReference.putFile(uri).addOnCompleteListener(ChatActivity.this,
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -271,7 +309,7 @@ public class ChatActivity extends DrawerDefault {
                                                     if (task.isSuccessful()) {
                                                         FriendlyMessage friendlyMessage =
                                                                 new FriendlyMessage(null, mUsername, mPhotoUrl,
-                                                                        task.getResult().toString());
+                                                                        task.getResult().toString(),mFirebaseUser.getUid());
                                                         mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
                                                                 .setValue(friendlyMessage);
                                                     }
@@ -297,7 +335,7 @@ public class ChatActivity extends DrawerDefault {
                     Log.d(TAG, "Uri: " + uri.toString());
 
                     FriendlyMessage tempMessage = new FriendlyMessage(null, mUsername, mPhotoUrl,
-                            LOADING_IMAGE_URL);
+                            LOADING_IMAGE_URL,mFirebaseUser.getUid());
                     mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
                             .setValue(tempMessage, new DatabaseReference.CompletionListener() {
                                 @Override
