@@ -19,14 +19,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.kazim.womensafe.FakeCall.FakeCallActivity;
 
 public class DrawerDefault extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private DrawerLayout drawer;
-    NavigationView navigationView;
+    public DrawerLayout drawer;
+    public NavigationView navigationView;
     private FirebaseAuth auth;
     private FirebaseUser user;
-    FrameLayout frameLayout;
-    String activityName;
+    public FrameLayout frameLayout;
+    public String activityName;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +102,12 @@ public class DrawerDefault extends AppCompatActivity implements NavigationView.O
                 else{
                 Intent myIntent3 = new Intent(this, ChatActivity.class);
                 this.startActivity(myIntent3);
+                break;}
+            case R.id.fakecallactivity:
+                if(activityName=="fakeactivity")break;
+                else{
+                Intent myIntent4 = new Intent(this, FakeCallActivity.class);
+                this.startActivity(myIntent4);
                 break;}
         }
         return true;

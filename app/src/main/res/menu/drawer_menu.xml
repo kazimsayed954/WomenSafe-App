@@ -9,6 +9,11 @@
             android:id="@+id/chatactivity"
             android:title="Chat Room"
             android:icon="@drawable/ic_chat"/>
+
+        <item
+            android:id="@+id/fakecallactivity"
+            android:title="Fake Call"
+            android:icon="@drawable/ic_round_call_24"/>
     </group>
     <item android:title="Actions">
         <menu>
