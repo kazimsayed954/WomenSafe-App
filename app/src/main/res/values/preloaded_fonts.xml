@@ -2,6 +2,13 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/baloo</item>
+        <item>@font/lato</item>
+        <item>@font/lato_light</item>
+        <item>@font/lato_thin</item>
+        <item>@font/open_sans</item>
+        <item>@font/open_sans_light</item>
+        <item>@font/open_sans_semibold</item>
+        <item>@font/roboto_light</item>
         <item>@font/coustard</item>
     </array>
 </resources>

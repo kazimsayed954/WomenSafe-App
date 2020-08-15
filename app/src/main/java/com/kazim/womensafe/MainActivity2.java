@@ -16,25 +16,17 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -51,11 +43,7 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.kazim.womensafe.FakeCall.FakeCallActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,12 +53,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener
+public class MainActivity2 extends DrawerDefault implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener
 {
-    private DrawerLayout drawer;
-    NavigationView navigationView;
-    private FirebaseAuth auth;
-    private FirebaseUser user;
+
     Button btnShowLocation;private static final int REQUEST_CODE_PERMISSION = 2;
     TextInputLayout textInputLayout;
     int position = 0;
@@ -105,25 +90,11 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
 //            editor.apply();
 //        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        drawer = findViewById(R.id.drawer_layout);
-
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        setContentView(R.layout.activity_main2);
+//        setDrawer();
+        getLayoutInflater().inflate(R.layout.activity_main2,frameLayout);
         navigationView.setCheckedItem(R.id.sosactivity);
-        addDetails();
+        activityName = "mainactivity2";
 
         gestureDetector = new GestureDetector(MainActivity2.this, MainActivity2.this);
         LocationRequest locationRequest = LocationRequest.create();
@@ -245,47 +216,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         });
     }
 
-    private void addDetails() {
-        String headname = user.getDisplayName();
-        String headmail = user.getEmail();
-        View headerView = navigationView.getHeaderView(0);
-        TextView tvheadname = headerView.findViewById(R.id.header_name);
-        TextView tvheadmail = headerView.findViewById(R.id.header_email);
-//        Toast.makeText(this, headname, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, headmail, Toast.LENGTH_SHORT).show();
-//
-        if (!(TextUtils.isEmpty(headname))){
-            tvheadname.setText(headname);
-        }
-        if (!(TextUtils.isEmpty(headmail))){
-            tvheadmail.setText(headmail);
-        }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.signout:
-                auth.signOut();
-                Intent myIntent = new Intent(MainActivity2.this, LoginActivity.class);
-                MainActivity2.this.startActivity(myIntent);
-                finish();
-                break;
-            case R.id.changepswrd:
-                auth.signOut();
-                Intent myIntent1 = new Intent(MainActivity2.this, ForgotActivity.class);
-                MainActivity2.this.startActivity(myIntent1);
-                finish();
-                break;
-            case R.id.fakecallactivity:
-                Intent myIntent2 = new Intent(MainActivity2.this, FakeCallActivity.class);
-                MainActivity2.this.startActivity(myIntent2);
-                finish();
-                break;
-        }
-        return true;
-    }
-
     public void send()
     {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
@@ -391,14 +321,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
         super.onResume();
     }
 
-@Override
-public void onBackPressed() {
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
-        drawer.closeDrawer(GravityCompat.START);
-    } else {
-        finish();
-    }
-}
     @Override
     protected void onStart()
     {

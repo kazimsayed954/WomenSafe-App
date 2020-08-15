@@ -1,24 +1,22 @@
 package com.kazim.womensafe.FakeCall;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
-import es.dmoral.toasty.Toasty;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
+import androidx.core.view.GravityCompat;
+
+import com.kazim.womensafe.DrawerDefault;
 import com.kazim.womensafe.MainActivity2;
 import com.kazim.womensafe.R;
 
-public class FakeCallActivity extends AppCompatActivity {
+import es.dmoral.toasty.Toasty;
+
+public class    FakeCallActivity extends DrawerDefault {
 
     public RadioGroup radioGroup;
     public int afterTime;
@@ -28,7 +26,13 @@ public class FakeCallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fake_call);
+        //setContentView(R.layout.activity_fake_call);
+
+        //following lines are added to implement drawer in this activity
+        getLayoutInflater().inflate(R.layout.activity_fake_call, frameLayout);
+        navigationView.setCheckedItem(R.id.fakecallactivity);
+        activityName = "fakeactivity";
+
         editName = findViewById(R.id.edit_name);
         editNumber = findViewById(R.id.edit_phoneno);
 
@@ -60,9 +64,14 @@ public class FakeCallActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity2.class);
-        startActivity(intent);
-        finish();
+        //if drawer is open then close it on back press
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(this, MainActivity2.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void callBtnEvent(View view) {
