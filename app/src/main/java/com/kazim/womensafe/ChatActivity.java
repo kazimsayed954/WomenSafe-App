@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -46,18 +47,17 @@ public class ChatActivity extends DrawerDefault {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabaseReference;
+    static {  FirebaseDatabase.getInstance().setPersistenceEnabled(true); }
     private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mFirebaseAdapter;
-    private String rightmsg;
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
         ImageView messageImageView;
         TextView messengerTextView;
+        TextView dateTextView;
         ImageView messengerImageView;
         LinearLayout msgllayout;
         LinearLayout bubblellayout;
-        public static final int  MSG__TYPE_LEFT = 0;
-        public static final int  MSG__TYPE_RIGHT = 1;
 
         public MessageViewHolder(View v) {
             super(v);
@@ -67,6 +67,7 @@ public class ChatActivity extends DrawerDefault {
             messageImageView = (ImageView) itemView.findViewById(R.id.messageImageView);
             messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
             messengerImageView = (ImageView) itemView.findViewById(R.id.messengerImageView);
+            dateTextView =  itemView.findViewById(R.id.dateTextView);
         }
     }
     private static final String TAG = "ChatActivity";
@@ -124,6 +125,7 @@ public class ChatActivity extends DrawerDefault {
 
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
         SnapshotParser<FriendlyMessage> parser = new SnapshotParser<FriendlyMessage>() {
             @Override
             public FriendlyMessage parseSnapshot(DataSnapshot dataSnapshot) {
@@ -159,14 +161,13 @@ public class ChatActivity extends DrawerDefault {
                                             FriendlyMessage friendlyMessage) {
 
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-
-                Log.i("msg--","UID: "+friendlyMessage.getUID());
-                isMessageSent(friendlyMessage.getUID(),viewHolder);
+                viewHolder.dateTextView.setText(DateFormat.format("HH:mm",friendlyMessage.getMessageTime()));
+                boolean shouldSetImage = isMessageSent(friendlyMessage.getUID(),viewHolder);
                 if (friendlyMessage.getText() != null) {
                     viewHolder.messageTextView.setText(friendlyMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
                     viewHolder.messageImageView.setVisibility(ImageView.GONE);
-                } else if (friendlyMessage.getImageUrl() != null) {
+                } else if (friendlyMessage.getImageUrl() != null && shouldSetImage) {
                     String imageUrl = friendlyMessage.getImageUrl();
                     if (imageUrl.startsWith("gs://")) {
                         StorageReference storageReference = FirebaseStorage.getInstance()
@@ -276,7 +277,7 @@ public class ChatActivity extends DrawerDefault {
         });
     }
 
-    private void isMessageSent(String fmsgUID,MessageViewHolder viewHolder) {
+    private boolean isMessageSent(String fmsgUID,MessageViewHolder viewHolder) {
         final float scale = ChatActivity.this.getResources().getDisplayMetrics().density;
         int pixels = (int) (300 * scale + 0.5f);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pixels, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -286,12 +287,14 @@ public class ChatActivity extends DrawerDefault {
             viewHolder.bubblellayout.setLayoutParams(params);
             viewHolder.msgllayout.setBackgroundResource(R.drawable.background_message_right);
             viewHolder.messengerImageView.setVisibility(View.GONE);
+            return false;
         }
         else{
              params.gravity = Gravity.START;
             viewHolder.bubblellayout.setLayoutParams(params);
             viewHolder.msgllayout.setBackgroundResource(R.drawable.background_message_left);
             viewHolder.messengerImageView.setVisibility(View.VISIBLE);
+            return true;
         }
     }
 
