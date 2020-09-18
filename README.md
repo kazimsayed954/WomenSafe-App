@@ -1,4 +1,4 @@
-<h2 align="center"><b>WomenSafe App</b></h2>
+<h1 align="center"><b>WomenSafe App</b></h1>
 
 
 [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://github.com/kazimsayed954/WomenSafe-App)
