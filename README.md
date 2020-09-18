@@ -9,4 +9,4 @@
 
 Thank you to all the contributors who help in making this project better :raised_hands:
 
-<a href="https://github.com/arshadkazmi42"><img src="https://github.com/arshadkazmi42.png" width="30" /></a><a href="https://github.com/PulsarBlow"><img src="https://github.com/PulsarBlow.png" width="30" /></a><a href="https://github.com/daniloleemes"><img src="https://github.com/daniloleemes.png" width="30" /></a><a href="https://github.com/mariumfirdous"><img src="https://github.com/mariumfirdous.png" width="30" /></a>
+<a href="https://github.com/abhishekgupta368"><img src="https://github.com/abhishekgupta368.png" width="30" /></a><a href="https://github.com/maharishi1"><img src="https://github.com/maharishi1.png" width="30" /></a><a href="https://github.com/daniloleemes"><img src="https://github.com/daniloleemes.png" width="30" /></a><a href="https://github.com/mariumfirdous"><img src="https://github.com/mariumfirdous.png" width="30" /></a>
