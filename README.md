@@ -9,4 +9,6 @@
 
 Thank you to all the contributors who help in making this project better :raised_hands:
 
-<a href="https://github.com/abhishekgupta368"><img src="https://github.com/abhishekgupta368.png" width="30" /></a><a href="https://github.com/maharishi1"><img src="https://github.com/maharishi1.png" width="30" /></a><a href="https://github.com/TheRealTechWiz"><img src="https://github.com/daniloleemes.png" width="30" /></a>
+<a href="https://github.com/abhishekgupta368"><img src="https://github.com/abhishekgupta368.png" width="30" /></a>
+<a href="https://github.com/maharishi1"><img src="https://github.com/maharishi1.png" width="30" /></a>
+<a href="https://github.com/TheRealTechWiz"><img src="https://github.com/TheRealTechWiz.png" width="30" /></a>
