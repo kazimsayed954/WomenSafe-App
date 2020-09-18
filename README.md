@@ -1,4 +1,3 @@
-<body  style="background-color:black;">
 <h1 align="center"><b>WomenSafe App</b></h1>
 
 
@@ -44,4 +43,3 @@ Thank you to all the contributors who help in making this project better :raised
 <a href="https://github.com/maharishi1"><img src="https://github.com/maharishi1.png" width="30" /></a>
 <a href="https://github.com/TheRealTechWiz"><img src="https://github.com/TheRealTechWiz.png" width="30" /></a>
 
-</body>
