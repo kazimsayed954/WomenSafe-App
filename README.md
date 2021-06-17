@@ -37,9 +37,9 @@ Transfer the apk to your device and install it to use the application.
 
 ## Contributors
 
-Thank you to all the contributors who help in making this project better :raised_hands:
+#### Thank you to all the contributors who help in making this project better :raised_hands:
 
-<a href="https://github.com/abhishekgupta368"><img src="https://github.com/abhishekgupta368.png" width="30" /></a>
-<a href="https://github.com/maharishi1"><img src="https://github.com/maharishi1.png" width="30" /></a>
-<a href="https://github.com/TheRealTechWiz"><img src="https://github.com/TheRealTechWiz.png" width="30" /></a>
+<a href="https://github.com/kazimsayed954/WomenSafe-App/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=kazimsayed954/WomenSafe-App" />
+</a>
 
